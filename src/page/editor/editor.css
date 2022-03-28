@@ -1,0 +1,68 @@
+.editor-content {
+	height: 100%;
+	width: 100%;
+	display: grid;
+	grid-template-rows: 40px 1fr;
+}
+
+.editor-content-title {
+	padding: 0 5px;
+	display: flex;
+	border-bottom: 1px #ddd solid;
+	align-items: center;
+}
+
+.editor-content-title-form {
+	margin-left: 10px;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	flex: 1;
+}
+.editor-content-title-formText {
+	font-size: 18px;
+	font-weight: bold;
+}
+
+.editor-content-title-input {
+	margin-left: 10px;
+	border: 0;
+	outline: none;
+	height: 80%;
+	font-size: 14px;
+	border: 1px solid #ccc;
+	border-radius: 3px;
+}
+
+.editor-content-title-action {
+	padding: 5px;
+}
+.editor-content-title-button {
+	border: 0;
+	border-radius: 5px;
+	height: 30px;
+	width: 70px;
+	margin-right: 10px;
+	background-color: #0787ff;
+	color: white;
+	cursor: pointer;
+}
+.editor-content-title-ActionText {
+	font-size: 14px;
+	text-decoration: underline;
+	cursor: pointer;
+	color: #d81f35;
+}
+/* .editor-content-all {
+	height: 100%;
+}
+
+.editor-content-text {
+	flex: 1;
+	height: 100%;
+}
+
+.editor-content-view {
+	flex: 1;
+	height: 100%;
+} */

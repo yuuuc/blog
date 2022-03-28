@@ -1,0 +1,23 @@
+.scrollBar {
+	box-sizing: border-box;
+	height: 100%;
+	background-color: #ddd;
+	position: relative;
+	overflow: hidden;
+}
+.bar {
+	width: 5px;
+	height: 100px;
+	background-color: #aaa;
+	position: absolute;
+	right: 0px;
+	top: 0px;
+	border-radius: 10px;
+}
+
+.list {
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+}
