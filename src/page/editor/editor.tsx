@@ -57,7 +57,6 @@ export default () => {
 					ref={editor}
 					style={{ height: '100%' }}
 					renderHTML={(text) => {
-						console.log(md.render(text));
 						return md.render(text);
 					}}
 				/>

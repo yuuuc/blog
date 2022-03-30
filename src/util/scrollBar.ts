@@ -1,6 +1,4 @@
-import BScroll from '@better-scroll/core';
-import ScrollBar from '@better-scroll/scroll-bar';
-import { MouseWheel } from 'better-scroll';
+import BScroll, { MouseWheel, ScrollBar } from 'better-scroll';
 BScroll.use(MouseWheel);
 BScroll.use(ScrollBar);
 

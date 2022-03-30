@@ -5,7 +5,6 @@ const Home = React.lazy(
 	() =>
 		import(
 			/* webpackChunkName: 'home' */
-			/* webpackPreload: true */
 			'@/page/home/home'
 		)
 );
@@ -16,6 +15,15 @@ const Editor = React.lazy(
 			/* webpackChunkName: 'editor' */
 			/* webpackPrefetch: true */
 			'@/page/editor/editor'
+		)
+);
+
+const Login = React.lazy(
+	() =>
+		import(
+			/* webpackChunkName: 'login' */
+			/* webpackPrefetch: true */
+			'@/page/login/login'
 		)
 );
 

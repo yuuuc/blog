@@ -1,13 +1,19 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const HtmlWebpackInjectPreload = require('@principalstudio/html-webpack-inject-preload');
+// import { Configuration } from 'webpack';
 
-module.exports = {
+/**
+ * @type {Configuration}
+ */
+const config = {
 	entry: {
 		app: './src/index.tsx'
 	},
 	output: {
 		path: path.resolve(__dirname, './dist'),
-		filename: '[name].bundle.js',
+		filename: '[name].[chunkhash:8].js',
+		publicPath: '/',
 		clean: true
 	},
 	module: {
@@ -52,6 +58,22 @@ module.exports = {
 		new HtmlWebpackPlugin({
 			template: path.resolve(__dirname, './index.html'),
 			filename: 'index.html'
+		}),
+		new HtmlWebpackInjectPreload({
+			files: [
+				{
+					match: /(vendor-*|app).*.\.js$/,
+					attributes: { as: 'script' }
+				}
+			]
 		})
-	]
+	],
+	resolve: {
+		alias: {
+			'@': path.resolve(__dirname, './src')
+		},
+		extensions: ['.ts', '.tsx', '.js', '.jsx']
+	}
 };
+
+module.exports = config;

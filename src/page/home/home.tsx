@@ -7,7 +7,7 @@ import Search from '@/component/search/search';
 import './home.css';
 
 interface Doc {
-	_id: string;
+	id: string;
 	title: string;
 	content?: string;
 }
@@ -37,9 +37,9 @@ function Directory(props: DirProp) {
 				{directory.map((item) => {
 					return (
 						<li
-							className={id === item._id ? 'dirActive' : 'dirItem'}
-							key={item._id}
-							data-id={item._id}
+							className={id === item.id ? 'dirActive' : 'dirItem'}
+							key={item.id}
+							data-id={item.id}
 							onClick={(e) => active((e.target as any).dataset.id)}
 						>
 							{item.title}
@@ -65,6 +65,9 @@ function Home() {
 		setDirectory(data);
 	};
 	const onSearch = async () => {
+		if (search.trim() === '') {
+			return alert('查询内容不能为空');
+		}
 		const { data } = await getDocByTitle(search);
 		console.log(data);
 	};
