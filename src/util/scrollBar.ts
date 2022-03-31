@@ -1,9 +1,9 @@
-import BScroll, { MouseWheel, ScrollBar } from 'better-scroll';
-BScroll.use(MouseWheel);
-BScroll.use(ScrollBar);
+import BetterScroll, { MouseWheel, ScrollBar } from 'better-scroll';
+BetterScroll.use(MouseWheel);
+BetterScroll.use(ScrollBar);
 
 export default function (ele: any) {
-	new BScroll(ele, {
+	return new BetterScroll(ele, {
 		scrollY: true,
 		scrollbar: true,
 		bounce: false,

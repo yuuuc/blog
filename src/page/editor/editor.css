@@ -30,6 +30,7 @@
 	outline: none;
 	height: 80%;
 	font-size: 14px;
+	padding: 0 5px;
 	border: 1px solid #ccc;
 	border-radius: 3px;
 }
@@ -37,6 +38,7 @@
 .editor-content-title-action {
 	padding: 5px;
 }
+
 .editor-content-title-button {
 	border: 0;
 	border-radius: 5px;
@@ -47,12 +49,67 @@
 	color: white;
 	cursor: pointer;
 }
+
 .editor-content-title-ActionText {
 	font-size: 14px;
 	text-decoration: underline;
 	cursor: pointer;
 	color: #d81f35;
 }
+
+.dialog-login {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+}
+
+.login-title {
+	color: #0787ff;
+	font-size: 20px;
+	width: 100%;
+	text-align: center;
+	padding: 5px 0;
+	height: 40px;
+}
+
+.login-context {
+	flex-grow: 1;
+	margin: 0 auto;
+	padding: 10px 0;
+}
+
+.login-foot {
+	height: 100px;
+	margin: 0 auto;
+	padding: 10px 0;
+}
+
+.context-row {
+	height: 30px;
+	margin: 15px;
+}
+
+.context-row .input {
+	display: inline-block;
+	height: 100%;
+	outline: none;
+	border: 1px solid #aaa;
+	border-radius: 3px;
+	margin-left: 10px;
+	padding: 0 5px;
+}
+
+.login-foot .button {
+	color: white;
+	border: 0;
+	background-color: #0787ff;
+	width: 160px;
+	padding: 10px 20px;
+	border-radius: 5px;
+	cursor: pointer;
+}
+
 /* .editor-content-all {
 	height: 100%;
 }

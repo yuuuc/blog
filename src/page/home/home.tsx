@@ -26,6 +26,8 @@ function Directory(props: DirProp) {
 		const { data } = await postDocById(id);
 		setDoc(data.content);
 	};
+
+	const [fill, setFill] = useState(new Array(100).fill(0));
 	useEffect(() => {
 		active('62417d214772b9c192af499f');
 	}, []);
@@ -34,7 +36,7 @@ function Directory(props: DirProp) {
 	} else {
 		return (
 			<>
-				{directory.map((item) => {
+				{/* {directory.map((item) => {
 					return (
 						<li
 							className={id === item.id ? 'dirActive' : 'dirItem'}
@@ -43,6 +45,16 @@ function Directory(props: DirProp) {
 							onClick={(e) => active((e.target as any).dataset.id)}
 						>
 							{item.title}
+						</li>
+					);
+				})} */}
+				{fill.map((item, index) => {
+					return (
+						<li
+							className={id === item.id ? 'dirActive' : 'dirItem'}
+							key={index}
+						>
+							{index}
 						</li>
 					);
 				})}
@@ -54,6 +66,7 @@ function Directory(props: DirProp) {
 function Home() {
 	const viewWrapper = useRef<HTMLDivElement | null>(null);
 	const directoryWrapper = useRef<HTMLDivElement | null>(null);
+	const wrapper = useRef<HTMLUListElement | null>(null);
 	const navigate = useNavigate();
 	// html文档
 	const [doc, setDoc] = useState('');
@@ -63,6 +76,7 @@ function Home() {
 	const getData = async () => {
 		const { data } = await getDocs();
 		setDirectory(data);
+		initScroll();
 	};
 	const onSearch = async () => {
 		if (search.trim() === '') {
@@ -71,14 +85,14 @@ function Home() {
 		const { data } = await getDocByTitle(search);
 		console.log(data);
 	};
-	const mounted = () => {
-		ScrollBar(viewWrapper.current);
+	const initScroll = () => {
 		ScrollBar(directoryWrapper.current);
+		ScrollBar(viewWrapper.current);
+		console.log(wrapper.current?.scrollHeight);
 	};
 
 	useEffect(() => {
 		getData();
-		mounted();
 	}, []);
 
 	return (
@@ -100,7 +114,7 @@ function Home() {
 			</div>
 			<div className='home-content'>
 				<div className='wrapper' ref={directoryWrapper}>
-					<ul>
+					<ul ref={wrapper}>
 						<Directory directory={directory} setDoc={setDoc}></Directory>
 					</ul>
 				</div>
