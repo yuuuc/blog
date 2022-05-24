@@ -15,11 +15,12 @@ interface Doc {
 interface DirProp {
 	directory: Doc[];
 	setDoc: React.Dispatch<React.SetStateAction<string>>;
+	index: number;
 }
 
 // Directory
 function Directory(props: DirProp) {
-	const { directory, setDoc } = props;
+	const { directory, setDoc, index } = props;
 	const [id, setId] = useState('');
 	const active = async (id: string) => {
 		setId(id);
@@ -29,14 +30,16 @@ function Directory(props: DirProp) {
 
 	const [fill, setFill] = useState(new Array(100).fill(0));
 	useEffect(() => {
-		active('62417d214772b9c192af499f');
-	}, []);
+		if (directory[index]) {
+			active(directory[index].id);
+		}
+	}, [directory, index]);
 	if (directory.length <= 0) {
 		return <>Loading...</>;
 	} else {
 		return (
 			<>
-				{/* {directory.map((item) => {
+				{directory.map((item) => {
 					return (
 						<li
 							className={id === item.id ? 'dirActive' : 'dirItem'}
@@ -47,8 +50,8 @@ function Directory(props: DirProp) {
 							{item.title}
 						</li>
 					);
-				})} */}
-				{fill.map((item, index) => {
+				})}
+				{/* {fill.map((item, index) => {
 					return (
 						<li
 							className={id === item.id ? 'dirActive' : 'dirItem'}
@@ -57,7 +60,7 @@ function Directory(props: DirProp) {
 							{index}
 						</li>
 					);
-				})}
+				})} */}
 			</>
 		);
 	}
@@ -72,6 +75,8 @@ function Home() {
 	const [doc, setDoc] = useState('');
 	const [directory, setDirectory] = useState<Doc[]>([]);
 	const [search, setSearch] = useState('');
+	const [dirScroll, setDirScroll] = useState<any>(null);
+	const [index, setIndex] = useState(0);
 
 	const getData = async () => {
 		const { data } = await getDocs();
@@ -82,13 +87,30 @@ function Home() {
 		if (search.trim() === '') {
 			return alert('查询内容不能为空');
 		}
-		const { data } = await getDocByTitle(search);
-		console.log(data);
+		const index = directory.findIndex((item) => item.title === search.trim());
+		if (index < 0) {
+			alert('no search you want!');
+		}
+		const scrollHeight = wrapper.current?.scrollHeight as number;
+		const parentHeight = wrapper.current?.parentElement?.clientHeight as number;
+		const goalHeight = index * 40;
+		const goalMove = goalHeight - parentHeight;
+		const maxMove = scrollHeight - parentHeight;
+		if (goalMove > 0) {
+			const count = parseInt((goalHeight / parentHeight).toString()) - 1;
+			if (count > 0) {
+				dirScroll.scrollTo(0, -count * parentHeight, 300, undefined);
+			} else {
+				dirScroll.scrollTo(0, -maxMove, 300, undefined);
+			}
+		} else {
+			dirScroll.scrollTo(0, 0, 300, undefined);
+		}
+		setIndex(index);
 	};
 	const initScroll = () => {
-		ScrollBar(directoryWrapper.current);
+		setDirScroll(ScrollBar(directoryWrapper.current));
 		ScrollBar(viewWrapper.current);
-		console.log(wrapper.current?.scrollHeight);
 	};
 
 	useEffect(() => {
@@ -115,7 +137,11 @@ function Home() {
 			<div className='home-content'>
 				<div className='wrapper' ref={directoryWrapper}>
 					<ul ref={wrapper}>
-						<Directory directory={directory} setDoc={setDoc}></Directory>
+						<Directory
+							directory={directory}
+							setDoc={setDoc}
+							index={index}
+						></Directory>
 					</ul>
 				</div>
 				<div className='view custom-html-style' ref={viewWrapper}>

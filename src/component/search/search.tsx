@@ -20,8 +20,6 @@ function ShowClear(props: any) {
 	const { search, setSearch } = props;
 
 	if (search && search.length > 0) {
-		console.log(123);
-
 		return (
 			<>
 				<span

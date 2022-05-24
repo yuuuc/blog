@@ -19,8 +19,6 @@ http.interceptors.request.use(
 		if (!user) {
 			return config;
 		} else {
-			console.log(user);
-
 			(config.headers as any)['token'] = user['id'];
 			return config;
 		}
